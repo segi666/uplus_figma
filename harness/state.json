@@ -1,6 +1,6 @@
 {
   "branch": "harness/run-20261021",
-  "phase": "P5",
+  "phase": "comments",
   "phases": {
     "P1": {
       "status": "passed",
@@ -23,7 +23,7 @@
       "commit": null
     },
     "P5": {
-      "status": "pending",
+      "status": "passed",
       "failures": 0,
       "commit": null
     },
@@ -65,5 +65,9 @@
       "commit": "f5e0ace"
     }
   },
-  "approval": null
+  "approval": {
+    "date": "2026-10-21",
+    "by": "사람",
+    "scope": "스크린샷 6장 · 화면 요약 6줄"
+  }
 }
