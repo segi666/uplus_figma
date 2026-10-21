@@ -1,0 +1,14 @@
+import { PlanDetail } from "@/components/PlanDetail";
+import { plans } from "@/lib/data";
+
+// 화면 04 요금제 상세 · 청구 금액 내역 (route: /plans/[id])
+// cacheComponents가 켜져 있어 샘플 요금제 id를 미리 알려 준다 (빌드 때 params를 알 수 있게).
+// 목록에 없는 id도 요청 때 렌더되고, 화면 안에서 03으로 보낸다.
+export async function generateStaticParams() {
+  return plans.map((p) => ({ id: p.id }));
+}
+
+export default async function PlanDetailPage({ params }: PageProps<"/plans/[id]">) {
+  const { id } = await params;
+  return <PlanDetail id={id} />;
+}
