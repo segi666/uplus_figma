@@ -13,21 +13,23 @@ import { useSelection } from "@/components/useSelection";
 import {
   buildApplication,
   hasApplicantErrors,
-  saveApplication,
   validateApplicant,
   type ApplicantErrors,
 } from "@/lib/application";
 import { findPlan } from "@/lib/data";
 import { formatWon, priceBreakdown } from "@/lib/pricing";
 import { contractLabel, customerTypeOptions, isUsageStepComplete } from "@/lib/selection";
+import { createSubscription } from "@/lib/subscriptionApi";
 
 // 화면 05 신청 확인 (저장) (route: /apply)
 // states: 기본 · change 고객(첫 달 청구 금액 줄) · 이전 선택 없음(01로 보냄)
 //         · 입력 오류: 이름 비움 / 이메일 비움 / 이메일 형식 틀림 · 동의 안 함
-//         · 저장 중(신청하기 Disabled) · 저장 실패(안내, 입력 유지, 다시 시도) · 저장 성공(06으로)
-// 입력칸은 이름 · 이메일 · 동의 3개뿐이다 (R15). 저장은 이 브라우저에만 한다 (F5, C1).
+//         · 저장 중(신청하기 Disabled, 진행 중 표시) · 저장 실패(안내, 입력 유지, 다시 시도) · 저장 성공(06으로)
+// 입력칸은 이름 · 이메일 · 동의 3개뿐이다 (R15).
+// 실험 브랜치: 신청은 서버(create_subscription)에 저장하고, 받은 신청 번호로 06에 간다.
+// 이름 · 이메일은 브라우저 저장소에 남기지 않는다.
 // [기획] 신청 확인 화면: 04에서 이 요금제로 신청을 누르면 보인다. 고른 내용을 다시 보여 주고 이름·이메일·동의를 받아 신청을 저장한다.
-// [기획] 받는 정보는 이름과 이메일뿐이다. 저장은 이 브라우저 안에만 하고 서버로 보내지 않는다.
+// [기획] 받는 정보는 이름과 이메일뿐이다. (실험 브랜치) 신청은 서버에 저장하고, 이 브라우저에는 이름·이메일을 남기지 않는다.
 export default function ApplyPage() {
   const router = useRouter();
   const { selection, hydrated } = useSelection();
@@ -91,13 +93,13 @@ export default function ApplyPage() {
     setErrors(found);
     if (hasApplicantErrors(found)) return;
 
+    // 같은 신청이 두 번 나가지 않게 보내기 전에 잠근다
     savingRef.current = true;
     setSaving(true);
     setSaveFailed(false);
 
-    // 저장 중 상태(신청하기 Disabled)가 먼저 그려지게 한 박자 뒤에 저장한다
-    window.setTimeout(() => {
-      let ok = false;
+    void (async () => {
+      let id: string | null = null;
       try {
         const app = buildApplication({
           customerType,
@@ -108,19 +110,21 @@ export default function ApplyPage() {
           email,
           privacyConsent,
         });
-        ok = saveApplication(app).ok;
+        const r = await createSubscription(app);
+        id = r.ok ? r.id : null;
       } catch {
-        ok = false;
+        id = null;
       }
-      if (ok) {
-        router.push("/complete");
+      if (id) {
+        // 성공: 잠금은 풀지 않고 받은 신청 번호로 06에 간다
+        router.push(`/complete?id=${encodeURIComponent(id)}`);
         return;
       }
       // 저장 실패: 입력은 그대로 두고 다시 누를 수 있게 한다
       savingRef.current = false;
       setSaving(false);
       setSaveFailed(true);
-    });
+    })();
   };
 
   return (
@@ -204,10 +208,10 @@ export default function ApplyPage() {
           ) : null}
         </main>
 
-        {/* [기획] 하단 신청하기 버튼: 저장하는 동안에는 꺼져서 두 번 누를 수 없다. */}
+        {/* [기획] 하단 신청하기 버튼: 저장하는 동안에는 꺼지고 "신청하는 중…"으로 바뀌어 두 번 누를 수 없다. */}
         <BottomCTA>
-          <Button variant="primary" size="xl" fullWidth htmlType="submit" disabled={saving}>
-            신청하기
+          <Button variant="primary" size="xl" fullWidth htmlType="submit" disabled={saving} aria-busy={saving || undefined}>
+            {saving ? "신청하는 중…" : "신청하기"}
           </Button>
         </BottomCTA>
       </form>
