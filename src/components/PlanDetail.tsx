@@ -15,12 +15,15 @@ import { isUsageStepComplete, selectPlan } from "@/lib/selection";
 // states: 기본(change: 금액 줄 전부) · add 고객(결합 할인만, 위약금 · 첫 달 숨김)
 //         · port · new 고객(결합 할인 · 위약금 · 첫 달 숨김) · 약정 안 함(약정 할인 0원)
 //         · 이전 선택 없음(01로 보냄) · 없는 요금제 id(03으로 보냄) · 로딩 · 에러(해당 없음)
+// [기획] 요금제 상세 화면: 03에서 자세히 보기를 누르면 보인다. 요금제 정보와 실제 청구 금액이 어떻게 나왔는지 한 줄씩 보여 준다.
+// [기획] 금액 줄은 가입 형태에 따라 달라진다. 결합 할인은 요금제 변경·회선 추가만, 위약금과 첫 달 청구 금액은 요금제 변경만 보인다.
 export function PlanDetail({ id }: { id: string }) {
   const router = useRouter();
   const { selection, hydrated } = useSelection();
   const ready = isUsageStepComplete(selection);
   const plan = findPlan(id);
 
+  // [기획] 앞 화면 선택 없이 들어오면 01로, 없는 요금제면 03으로 돌려보낸다. 정상이면 고른 요금제를 기억해 두어 신청 화면(05)에서 쓴다.
   useEffect(() => {
     if (!hydrated) return;
     // 01~03을 거치지 않고 들어오면 01로 보낸다
@@ -48,6 +51,7 @@ export function PlanDetail({ id }: { id: string }) {
   const showFirstMonth = customerType === "change";
   const price = priceBreakdown(plan, { customerType, contractMonths: selection.contractMonths });
 
+  // [기획] 이 요금제로 신청 버튼 동작: 이 요금제를 기억해 두고 신청 확인 화면(05)으로 이동한다.
   const goApply = () => {
     selectPlan(plan.id);
     router.push("/apply");
@@ -55,11 +59,14 @@ export function PlanDetail({ id }: { id: string }) {
 
   return (
     <>
+      {/* [기획] 상단 헤더: 뒤로가기를 누르면 추천 결과(03)로 돌아간다. */}
       {header}
 
       <main className="flex w-full flex-1 flex-col gap-24 px-24 pt-24 pb-24">
+        {/* [기획] 요금 요약 카드: 요금제명과 할인 전 월 요금을 크게 보여 준다. */}
         <CardPrice label={plan.name} amount={formatWon(price.monthlyFee)} sub="할인 전 월 요금" />
 
+        {/* [기획] 요금제 정보: 데이터량, 데이터 다 쓴 뒤 속도, 통화, 문자, 테더링·공유 데이터 */}
         <section className="flex w-full flex-col gap-8">
           <h2 className="text-subtitle-bold text-text-primary">요금제 정보</h2>
           <dl className="flex w-full flex-col">
@@ -71,6 +78,7 @@ export function PlanDetail({ id }: { id: string }) {
           </dl>
         </section>
 
+        {/* [기획] 포함 혜택: 요금제에 포함된 혜택을 분홍 점과 함께 한 줄씩 보여 준다. */}
         <section className="flex w-full flex-col gap-8">
           <h2 className="text-subtitle-bold text-text-primary">포함 혜택</h2>
           <dl className="flex w-full flex-col">
@@ -80,6 +88,7 @@ export function PlanDetail({ id }: { id: string }) {
           </dl>
         </section>
 
+        {/* [기획] 청구 금액 내역: 월 요금에서 약정 할인·결합 할인을 빼 둘째 달부터 금액을 만들고, 위약금을 더해 첫 달 금액을 만든다. 약정 안 함이면 약정 할인은 0원이다. */}
         <section className="flex w-full flex-col gap-8">
           <h2 className="text-subtitle-bold text-text-primary">청구 금액 내역</h2>
           <dl className="flex w-full flex-col">
@@ -98,6 +107,7 @@ export function PlanDetail({ id }: { id: string }) {
       </main>
 
       {/* 요금제 상세 하단 구성 (design.md 3.4): 세로 버튼 2개, 위 16 · 좌우 24 · 사이 8 · 아래 32 = 높이 160 */}
+      {/* [기획] 하단 버튼 2개: 이 요금제로 신청(05로 이동), 다른 요금제 보기(03으로 이동). 화면을 내려도 아래에 붙어 있다. */}
       <div className="sticky bottom-0 flex w-full shrink-0 flex-col gap-8 bg-bg-surface px-24 pt-16 pb-32">
         <Button variant="primary" size="xl" fullWidth onClick={goApply}>
           이 요금제로 신청

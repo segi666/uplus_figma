@@ -26,6 +26,8 @@ import { contractLabel, customerTypeOptions, isUsageStepComplete } from "@/lib/s
 //         · 입력 오류: 이름 비움 / 이메일 비움 / 이메일 형식 틀림 · 동의 안 함
 //         · 저장 중(신청하기 Disabled) · 저장 실패(안내, 입력 유지, 다시 시도) · 저장 성공(06으로)
 // 입력칸은 이름 · 이메일 · 동의 3개뿐이다 (R15). 저장은 이 브라우저에만 한다 (F5, C1).
+// [기획] 신청 확인 화면: 04에서 이 요금제로 신청을 누르면 보인다. 고른 내용을 다시 보여 주고 이름·이메일·동의를 받아 신청을 저장한다.
+// [기획] 받는 정보는 이름과 이메일뿐이다. 저장은 이 브라우저 안에만 하고 서버로 보내지 않는다.
 export default function ApplyPage() {
   const router = useRouter();
   const { selection, hydrated } = useSelection();
@@ -46,6 +48,7 @@ export default function ApplyPage() {
   const consentErrorId = `${uid}-consent-error`;
 
   // 01~04를 거치지 않고 들어오면 01로 보낸다
+  // [기획] 가입 형태·약정·요금제를 고르지 않은 채 들어오면 가입 형태 선택(01)으로 돌려보낸다.
   useEffect(() => {
     if (hydrated && !ready) router.replace("/");
   }, [hydrated, ready, router]);
@@ -77,6 +80,8 @@ export default function ApplyPage() {
     if (checked && errors.privacyConsent) setErrors((prev) => ({ ...prev, privacyConsent: undefined }));
   };
 
+  // [기획] 신청하기 버튼 동작: 이름 비움·이메일 비움·이메일 형식 틀림·동의 안 함을 먼저 확인하고, 하나라도 틀리면 저장하지 않고 그 칸 아래에 안내를 띄운다.
+  // [기획] 모두 맞으면 신청 시점의 금액과 함께 저장하고, 성공하면 신청 완료(06)로 이동한다.
   const onSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (savingRef.current) return;
@@ -120,10 +125,12 @@ export default function ApplyPage() {
 
   return (
     <>
+      {/* [기획] 상단 헤더: 뒤로가기를 누르면 고른 요금제의 상세 화면(04)으로 돌아간다. */}
       {header}
 
       <form noValidate onSubmit={onSubmit} className="flex w-full flex-1 flex-col">
         <main className="flex w-full flex-1 flex-col gap-24 px-16 pt-24 pb-24">
+          {/* [기획] 신청 내용 요약: 가입 형태, 요금제, 약정, 둘째 달부터 청구 금액. 첫 달 청구 금액은 요금제 변경 고객에게만 보인다. */}
           <section className="flex w-full flex-col gap-8">
             <h2 className="text-subtitle-bold text-text-primary">신청 내용</h2>
             <dl className="flex w-full flex-col">
@@ -135,6 +142,7 @@ export default function ApplyPage() {
             </dl>
           </section>
 
+          {/* [기획] 신청자 정보 입력: 이름 칸, 이메일 칸, 개인정보 동의 체크 3개뿐이다. 틀린 칸은 밑줄이 빨갛게 바뀌고 칸 아래에 안내 문구가 뜬다. */}
           <section className="flex w-full flex-col gap-16">
             <h2 className="text-subtitle-bold text-text-primary">신청자 정보</h2>
 
@@ -160,6 +168,7 @@ export default function ApplyPage() {
               error={errors.email}
             />
 
+            {/* [기획] 개인정보 동의(필수): 체크하지 않고 신청하면 체크 아래에 동의해 달라는 안내가 빨간 글자로 뜬다. */}
             <div className="flex w-full flex-col gap-12">
               <div className="flex w-full items-start gap-8">
                 <Checkbox
@@ -187,6 +196,7 @@ export default function ApplyPage() {
             </div>
           </section>
 
+          {/* [기획] 저장 실패 안내: 저장이 안 됐을 때만 보인다. 입력한 내용은 지우지 않고, 신청하기를 다시 누를 수 있다. */}
           {saveFailed ? (
             <p role="alert" className="w-full text-body-small-medium text-text-error">
               신청을 저장하지 못했어요. 입력한 내용은 그대로 있어요. 다시 시도해 주세요.
@@ -194,6 +204,7 @@ export default function ApplyPage() {
           ) : null}
         </main>
 
+        {/* [기획] 하단 신청하기 버튼: 저장하는 동안에는 꺼져서 두 번 누를 수 없다. */}
         <BottomCTA>
           <Button variant="primary" size="xl" fullWidth htmlType="submit" disabled={saving}>
             신청하기

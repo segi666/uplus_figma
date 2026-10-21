@@ -1,6 +1,6 @@
 {
   "branch": "harness/run-20261021",
-  "phase": "comments",
+  "phase": "done",
   "phases": {
     "P1": {
       "status": "passed",
@@ -25,10 +25,10 @@
     "P5": {
       "status": "passed",
       "failures": 0,
-      "commit": null
+      "commit": "098a75e"
     },
     "comments": {
-      "status": "pending",
+      "status": "passed",
       "failures": 0,
       "commit": null
     }
