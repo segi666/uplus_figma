@@ -15,7 +15,7 @@
     "P3": {
       "status": "passed",
       "failures": 0,
-      "commit": null
+      "commit": "629cf44"
     },
     "P4": {
       "status": "pending",
