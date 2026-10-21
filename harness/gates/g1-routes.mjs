@@ -38,7 +38,12 @@ export async function run(args = []) {
     changed = false;
     for (const s of screens) {
       if (!reach.has(s.id)) continue;
-      for (const n of s.next ?? []) if (!reach.has(n.to) && ids.has(n.to)) reach.add(n.to), (changed = true);
+      for (const n of s.next ?? []) {
+        if (!reach.has(n.to) && ids.has(n.to)) {
+          reach.add(n.to);
+          changed = true;
+        }
+      }
     }
   }
   for (const id of ids) if (!reach.has(id)) v.push({ file: cfg.outputs.p2, msg: `화면 ${id}: 첫 화면에서 도달할 수 없음` });

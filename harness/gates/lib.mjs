@@ -191,7 +191,8 @@ export function checkTokens(text, file, allowed) {
         if (!colors.has(val) && !BG_MISC.has(val) && !/^(linear|radial|conic)/.test(val)) add(at, `bg 토큰 밖 값: ${raw}`);
         continue;
       }
-      // 11) border-* : 색 · 두께(0,1,2) · 스타일
+      // 11) border-* : 색 · 두께(0,1,2) · 스타일. border-t 같은 한쪽 테두리 단독은 허용
+      if (/^border(?:-[trblxyse])?$/.test(neg)) continue;
       if ((m = neg.match(/^border(?:-[trblxyse])?-(.+)$/))) {
         const val = m[1].replace(/\/\d+$/, "");
         if (!colors.has(val) && !BORDER_MISC.has(val)) add(at, `border 토큰 밖 값: ${raw}`);
