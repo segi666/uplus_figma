@@ -9,6 +9,7 @@ export type Selection = {
   customerType: CustomerType | null;
   purpose: Purpose | null;
   contractMonths: ContractMonths | null;
+  planId: string | null; // 03에서 고른 요금제 (04 · 05에서 쓴다)
 };
 
 export const customerTypes: CustomerType[] = ["change", "port", "new", "add"];
@@ -47,8 +48,7 @@ export function isUsageStepComplete(s: Selection): boolean {
   return s.customerType === "change" ? s.purpose !== null : true;
 }
 
-export const emptySelection: Selection = { customerType: null, purpose: null, contractMonths: null };
-
+export const emptySelection: Selection = { customerType: null, purpose: null, contractMonths: null, planId: null };
 const KEY = "plan-reco.selection";
 const EVENT = "plan-reco:selection-change";
 
@@ -90,6 +90,7 @@ export function parseSelection(raw: string | null): Selection {
       customerType,
       purpose: customerType === "change" && isPurpose(o.purpose) ? o.purpose : null,
       contractMonths: isContractMonths(o.contractMonths) ? o.contractMonths : null,
+      planId: typeof o.planId === "string" && o.planId !== "" ? o.planId : null,
     };
   } catch {
     return emptySelection;
@@ -132,6 +133,12 @@ export function selectPurpose(purpose: Purpose | null): Selection {
 
 export function selectContractMonths(contractMonths: ContractMonths | null): Selection {
   const next: Selection = { ...loadSelection(), contractMonths };
+  saveSelection(next);
+  return next;
+}
+
+export function selectPlan(planId: string | null): Selection {
+  const next: Selection = { ...loadSelection(), planId };
   saveSelection(next);
   return next;
 }
