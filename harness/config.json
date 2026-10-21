@@ -10,12 +10,36 @@
     "links": "reference/links.md"
   },
   "routes": [
-    { "id": "01", "route": "/", "name": "고객 유형 선택" },
-    { "id": "02", "route": "/usage", "name": "사용량 확인 · 목적·약정 선택" },
-    { "id": "03", "route": "/plans", "name": "추천 결과" },
-    { "id": "04", "route": "/plans/[id]", "name": "요금제 상세 · 청구 금액 내역" },
-    { "id": "05", "route": "/apply", "name": "신청 확인 (저장)" },
-    { "id": "06", "route": "/complete", "name": "신청 완료" }
+    {
+      "id": "01",
+      "route": "/",
+      "name": "고객 유형 선택"
+    },
+    {
+      "id": "02",
+      "route": "/usage",
+      "name": "사용량 확인 · 목적·약정 선택"
+    },
+    {
+      "id": "03",
+      "route": "/plans",
+      "name": "추천 결과"
+    },
+    {
+      "id": "04",
+      "route": "/plans/[id]",
+      "name": "요금제 상세 · 청구 금액 내역"
+    },
+    {
+      "id": "05",
+      "route": "/apply",
+      "name": "신청 확인 (저장)"
+    },
+    {
+      "id": "06",
+      "route": "/complete",
+      "name": "신청 완료"
+    }
   ],
   "outputs": {
     "p1": "harness/p1/context.md",
@@ -27,15 +51,36 @@
     "state": "harness/state.json"
   },
   "phaseScopes": {
-    "P1": ["harness/p1/"],
-    "P2": ["harness/p2/"],
-    "P3": ["harness/p3/", "src/app/tokens.css"],
-    "P4": ["src/"],
-    "P5": ["harness/p5/"],
-    "comments": ["src/"],
-    "spec": ["docs/screen-spec.md"],
-    "always": ["harness/state.json", "AGENTS.md", "next-env.d.ts"],
-    "excludeFromP4": ["src/app/tokens.css"]
+    "P1": [
+      "harness/p1/"
+    ],
+    "P2": [
+      "harness/p2/"
+    ],
+    "P3": [
+      "harness/p3/",
+      "src/app/tokens.css"
+    ],
+    "P4": [
+      "src/"
+    ],
+    "P5": [
+      "harness/p5/"
+    ],
+    "comments": [
+      "src/"
+    ],
+    "spec": [
+      "docs/screen-spec.md"
+    ],
+    "always": [
+      "harness/state.json",
+      "AGENTS.md",
+      "next-env.d.ts"
+    ],
+    "excludeFromP4": [
+      "src/app/tokens.css"
+    ]
   },
   "protected": [
     "docs/",
@@ -51,37 +96,149 @@
   ],
   "specUnlockMarker": "harness/.allow-spec-write",
   "tokens": {
-    "sizes": [4, 6, 20, 24, 26, 30, 32, 40, 42, 46, 48, 52, 56, 58, 64, 97, 139, 342, 358, 390],
+    "sizes": [
+      4,
+      6,
+      20,
+      24,
+      26,
+      30,
+      32,
+      40,
+      42,
+      46,
+      48,
+      52,
+      56,
+      58,
+      64,
+      97,
+      139,
+      342,
+      358,
+      390
+    ],
     "sizesSource": "docs/design.md.txt 3.3·3.4·4장 컴포넌트 치수",
-    "borderArbitrary": ["1.5px"],
+    "borderArbitrary": [
+      "1.5px"
+    ],
     "borderArbitrarySource": "docs/design.md.txt 4.1·4.7·4.11 테두리 1.5"
   },
   "contracts": {
-    "customerTypes": ["change", "port", "new", "add"],
-    "contractMonths": [12, 24, 0],
-    "purposes": { "change": ["more-data", "lower-fee"], "port": [null], "new": [null], "add": [null] },
+    "customerTypes": [
+      "change",
+      "port",
+      "new",
+      "add"
+    ],
+    "contractMonths": [
+      12,
+      24,
+      0
+    ],
+    "purposes": {
+      "change": [
+        "more-data",
+        "lower-fee"
+      ],
+      "port": [
+        null
+      ],
+      "new": [
+        null
+      ],
+      "add": [
+        null
+      ]
+    },
     "data": "src/lib/data.ts → export plans, sampleUsages, currentLine",
     "recommend": "src/lib/recommend.ts → export recommend({ customerType, contractMonths, purpose }) → { basisText, sortText, notice, items: [{ planId, monthlyAmount, firstMonthAmount }] }",
-    "application": "src/lib/application.ts → export buildApplication({ customerType, purpose, contractMonths, planId, name, email, privacyConsent }) → Application"
+    "application": "src/lib/application.ts → export buildApplication({ customerType, purpose, contractMonths, planId, name, email, privacyConsent }) → Application",
+    "pricing": "src/lib/pricing.ts → export priceBreakdown(plan, { customerType, contractMonths }) → { monthlyFee, contractDiscount, bundleDiscount, monthlyAmount, earlyTerminationFee, firstMonthAmount }, formatWon(n) → \"12,345원\""
   },
   "sort": {
     "key": "monthlyAmount",
-    "forbiddenKeys": ["incentive", "commission", "priority", "weight", "score", "rank", "인센티브", "수수료"],
+    "forbiddenKeys": [
+      "incentive",
+      "commission",
+      "priority",
+      "weight",
+      "score",
+      "rank",
+      "인센티브",
+      "수수료"
+    ],
     "basisPattern": "GB 기준",
     "sortPattern": "낮은 순"
   },
   "privacy": {
-    "fieldNames": { "name": "text", "email": "email", "privacyConsent": "checkbox" },
-    "applicationKeys": ["id", "customerType", "purpose", "contractMonths", "planId", "firstMonthAmount", "monthlyAmount", "name", "email", "privacyConsent", "createdAt"],
-    "forbiddenWords": ["password", "phone", "연락처", "전화번호", "결제", "카드번호", "cardNumber", "creditCard", "주민"],
-    "forbiddenInputTypes": ["password", "tel", "number"]
+    "fieldNames": {
+      "name": "text",
+      "email": "email",
+      "privacyConsent": "checkbox"
+    },
+    "applicationKeys": [
+      "id",
+      "customerType",
+      "purpose",
+      "contractMonths",
+      "planId",
+      "firstMonthAmount",
+      "monthlyAmount",
+      "name",
+      "email",
+      "privacyConsent",
+      "createdAt"
+    ],
+    "forbiddenWords": [
+      "password",
+      "phone",
+      "연락처",
+      "전화번호",
+      "결제",
+      "카드번호",
+      "cardNumber",
+      "creditCard",
+      "주민"
+    ],
+    "forbiddenInputTypes": [
+      "password",
+      "tel",
+      "number",
+      "hidden"
+    ]
   },
   "placeholder": {
     "planName": "^요금제 [A-Z]$",
     "benefitName": "^혜택 [A-Z]$"
   },
   "external": {
-    "allowUrls": ["http://www.w3.org/"]
+    "allowUrls": [
+      "http://www.w3.org/"
+    ]
   },
-  "maxRetries": 3
+  "maxRetries": 3,
+  "g7": {
+    "width": 375,
+    "height": 812,
+    "port": 3100,
+    "storage": {
+      "selection": "plan-reco.selection",
+      "application": "plan-reco.application"
+    },
+    "seed": {
+      "selection": {
+        "customerType": "change",
+        "purpose": "more-data",
+        "contractMonths": 24
+      },
+      "applicant": {
+        "name": "홍길동",
+        "email": "user@example.com",
+        "privacyConsent": true
+      }
+    },
+    "channel": "chrome",
+    "channelNote": "PC 정책상 ms-playwright의 Chromium 실행이 막혀 있어 설치된 Chrome을 쓴다"
+  }
 }

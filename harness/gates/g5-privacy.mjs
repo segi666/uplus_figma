@@ -44,6 +44,17 @@ export async function run() {
       }
     }
   }
+  // 2-1) 공용 컴포넌트 안의 실제 <input>: type은 허용 타입이거나 넘겨받은 값({...})만
+  const allowedTypes = new Set(Object.values(fieldNames));
+  for (const f of all.filter((x) => x.startsWith("src/components/"))) {
+    const text = read(f);
+    for (const m of text.matchAll(/<input\b([^>]*?)\/?>/gs)) {
+      const type = m[1].match(/\btype\s*=\s*["']([^"']+)["']/)?.[1];
+      if (type && !allowedTypes.has(type)) v.push({ file: f, line: lineOf(text, m.index), msg: `컴포넌트 안 입력 요소 type=${type} (허용: ${[...allowedTypes].join(", ")})` });
+      if (/\bhidden\b/.test(m[1]) && !/aria-hidden/.test(m[1])) v.push({ file: f, line: lineOf(text, m.index), msg: "숨긴 입력 요소 금지" });
+    }
+  }
+  // 실제 화면의 입력 요소 수는 G7이 /apply DOM에서 다시 센다.
   const total = Object.values(seen).reduce((a, b) => a + b, 0);
   for (const n of Object.keys(fieldNames)) if (seen[n] !== 1) v.push({ msg: `입력칸 ${n}: ${seen[n] ?? 0}개 (정확히 1개여야 함)` });
   if (total !== Object.keys(fieldNames).length) v.push({ msg: `입력칸 합계 ${total} ≠ ${Object.keys(fieldNames).length}` });

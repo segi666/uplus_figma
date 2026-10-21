@@ -1,0 +1,203 @@
+{
+  "generatedBy": "node harness/gates/build-tokens.mjs",
+  "sources": [
+    "docs/tokens.json.txt",
+    "docs/design.md.txt 2.2",
+    "harness/config.json tokens"
+  ],
+  "font": "Noto Sans KR",
+  "colors": {
+    "fill-accent": "#E6007E",
+    "text-accent": "#FF2E98",
+    "icon-accent": "#FF2E98",
+    "text-primary": "#181A1B",
+    "text-secondary": "#66707A",
+    "text-tertiary": "#878787",
+    "text-on-dark": "#FFFFFF",
+    "text-error": "#E30036",
+    "text-placeholder": "#B7BDC4",
+    "text-on-disabled": "#66707A",
+    "bg-surface": "#FFFFFF",
+    "bg-default": "#F7F7F7",
+    "bg-subtle": "#EFF1F3",
+    "bg-inverse": "#2D2D2D",
+    "bg-accent-subtle": "#FFF5FA",
+    "bg-error-subtle": "#FFF0F3",
+    "border-default": "#D9DCDF",
+    "border-subtle": "#EFF1F3",
+    "border-strong": "#181A1B",
+    "border-divider": "#0000001A",
+    "border-focus": "#FF2E98",
+    "border-error": "#E30036",
+    "fill-primary": "#E6007E",
+    "fill-secondary": "#181A1B",
+    "fill-tertiary": "#EFF1F3",
+    "fill-disabled": "#D9DCDF",
+    "fill-disabled-strong": "#B7BDC4",
+    "fill-primary-hover": "#E6007E",
+    "icon-default": "#66707A",
+    "icon-strong": "#181A1B",
+    "border-medium": "#66707A",
+    "surface-default": "#FFFFFF",
+    "icon-on-dark": "#FFFFFF",
+    "icon-disabled": "#D9DCDF",
+    "icon-error": "#E30036",
+    "icon-primary": "#000000",
+    "brand-primary": "#FF2E98",
+    "effect-shadow-subtle": "#0000000D"
+  },
+  "spacing": [
+    0,
+    2,
+    4,
+    6,
+    8,
+    10,
+    12,
+    16,
+    20,
+    24,
+    28,
+    32,
+    40,
+    48,
+    56,
+    60,
+    64,
+    80
+  ],
+  "sizes": [
+    4,
+    6,
+    20,
+    24,
+    26,
+    30,
+    32,
+    40,
+    42,
+    46,
+    48,
+    52,
+    56,
+    58,
+    64,
+    97,
+    139,
+    342,
+    358,
+    390
+  ],
+  "radius": {
+    "0": 0,
+    "2": 2,
+    "4": 4,
+    "5": 5,
+    "6": 6,
+    "8": 8,
+    "10": 10,
+    "12": 12,
+    "16": 16,
+    "20": 20,
+    "24": 24,
+    "32": 32,
+    "40": 40,
+    "999": 999,
+    "full": 9999
+  },
+  "textStyles": {
+    "heading-h1": {
+      "size": 32,
+      "lineHeight": 44,
+      "weight": 700,
+      "source": "heading/h1"
+    },
+    "heading-h2": {
+      "size": 28,
+      "lineHeight": 40,
+      "weight": 700,
+      "source": "heading/h2"
+    },
+    "heading-h3": {
+      "size": 24,
+      "lineHeight": 32,
+      "weight": 700,
+      "source": "heading/h3"
+    },
+    "heading-h4": {
+      "size": 20,
+      "lineHeight": 28,
+      "weight": 700,
+      "source": "heading/h4"
+    },
+    "subtitle-bold": {
+      "size": 18,
+      "lineHeight": 26,
+      "weight": 700,
+      "source": "subtitle/bold"
+    },
+    "subtitle-default": {
+      "size": 18,
+      "lineHeight": 26,
+      "weight": 600,
+      "source": "subtitle/default"
+    },
+    "body-strong": {
+      "size": 16,
+      "lineHeight": 24,
+      "weight": 600,
+      "source": "body/strong"
+    },
+    "body-medium": {
+      "size": 16,
+      "lineHeight": 24,
+      "weight": 500,
+      "source": "body/medium"
+    },
+    "body-small-strong": {
+      "size": 14,
+      "lineHeight": 21,
+      "weight": 600,
+      "source": "body/small-strong"
+    },
+    "body-small-medium": {
+      "size": 14,
+      "lineHeight": 21,
+      "weight": 500,
+      "source": "body/small-medium"
+    },
+    "caption-bold": {
+      "size": 13,
+      "lineHeight": 18,
+      "weight": 700,
+      "source": "caption/bold"
+    },
+    "caption-medium": {
+      "size": 13,
+      "lineHeight": 18,
+      "weight": 500,
+      "source": "caption/medium"
+    },
+    "caption-small-bold": {
+      "size": 12,
+      "lineHeight": 16,
+      "weight": 700,
+      "source": "caption/small-bold"
+    },
+    "caption-small": {
+      "size": 12,
+      "lineHeight": 16,
+      "weight": 500,
+      "source": "caption/small"
+    },
+    "caption-mini": {
+      "size": 10,
+      "lineHeight": 14,
+      "weight": 600,
+      "source": "caption/mini"
+    }
+  },
+  "borderArbitrary": [
+    "1.5px"
+  ]
+}

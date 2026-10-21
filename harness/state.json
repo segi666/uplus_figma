@@ -1,21 +1,73 @@
 {
-  "branch": null,
-  "phase": null,
+  "branch": "harness/run-20261021",
+  "phase": "done",
   "phases": {
-    "P1": { "status": "pending", "failures": 0, "commit": null },
-    "P2": { "status": "pending", "failures": 0, "commit": null },
-    "P3": { "status": "pending", "failures": 0, "commit": null },
-    "P4": { "status": "pending", "failures": 0, "commit": null },
-    "P5": { "status": "pending", "failures": 0, "commit": null },
-    "comments": { "status": "pending", "failures": 0, "commit": null }
+    "P1": {
+      "status": "passed",
+      "failures": 0,
+      "commit": "e24c458"
+    },
+    "P2": {
+      "status": "passed",
+      "failures": 0,
+      "commit": "8c92bf3"
+    },
+    "P3": {
+      "status": "passed",
+      "failures": 0,
+      "commit": "629cf44"
+    },
+    "P4": {
+      "status": "passed",
+      "failures": 0,
+      "commit": null
+    },
+    "P5": {
+      "status": "passed",
+      "failures": 0,
+      "commit": "098a75e"
+    },
+    "comments": {
+      "status": "passed",
+      "failures": 0,
+      "commit": null
+    }
   },
   "screens": {
-    "01": { "status": "pending", "failures": 0, "commit": null },
-    "02": { "status": "pending", "failures": 0, "commit": null },
-    "03": { "status": "pending", "failures": 0, "commit": null },
-    "04": { "status": "pending", "failures": 0, "commit": null },
-    "05": { "status": "pending", "failures": 0, "commit": null },
-    "06": { "status": "pending", "failures": 0, "commit": null }
+    "01": {
+      "status": "passed",
+      "failures": 0,
+      "commit": "aa924fc"
+    },
+    "02": {
+      "status": "passed",
+      "failures": 0,
+      "commit": "70c997d"
+    },
+    "03": {
+      "status": "passed",
+      "failures": 0,
+      "commit": "2bff9c8"
+    },
+    "04": {
+      "status": "passed",
+      "failures": 0,
+      "commit": "e442b14"
+    },
+    "05": {
+      "status": "passed",
+      "failures": 0,
+      "commit": "7142d47"
+    },
+    "06": {
+      "status": "passed",
+      "failures": 0,
+      "commit": "f5e0ace"
+    }
   },
-  "approval": null
+  "approval": {
+    "date": "2026-10-21",
+    "by": "사람",
+    "scope": "스크린샷 6장 · 화면 요약 6줄"
+  }
 }

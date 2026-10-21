@@ -34,24 +34,25 @@
 | P1 PRD 읽기 | `context-reader` | harness/p1/context.md | G0 | P1 |
 | P2 페이지 나누기 | `page-planner` | harness/p2/pages.json | G0 · G1(`--spec-only`) | P2 |
 | P3 토큰 적용 | `node harness/gates/build-tokens.mjs` | harness/p3/allowed.json · src/app/tokens.css | G0 | P3 |
-| P4 화면 구현 (화면마다) | `screen-builder` | src/** | G0 · G2 · G3 (+G4 화면 03, +G5 화면 05) | P4 |
-| P5 검증 | 게이트 전체 + `gate-judge` + 미리보기 | harness/p5/report.md · harness/p5/shots/ | G0~G7 | 아래 복귀 표 |
+| P4 화면 구현 (화면마다) | `screen-builder` | src/** | G0 · G2 · G3 · G9 (+G4 화면 03, +G5 화면 05) | P4 |
+| P5 검증 | 게이트 전체 + `gate-judge` | harness/p5/report.md · harness/p5/shots/ | G0~G7 · G9 | 아래 복귀 표 |
 | 승인 후 | `planner-comments` 스킬 | src/** 주석 | G8 · G3 | 되돌림 |
 - (선택) `명세 다시 만들어` → 사람 승인 → `harness/.allow-spec-write` 생성 → `screen-spec-writer` → 마커 삭제 → G0(`--phase spec`) → P2
 
 **복귀 표 (P5 실패)**
 | 실패 | 돌아갈 곳 |
 |---|---|
-| G2 토큰 · G3 build·lint · G4 정렬 · G5 개인정보 · G6 외부 호출 · G7 375px · gate-judge ❌ | P4 (해당 화면) |
+| G2 토큰 · G3 build·lint · G4 정렬 · G5 개인정보 · G6 외부 호출 · G7 375px · G9 금액 · gate-judge ❌ | P4 (해당 화면) |
 | G1 라우트 수 · 이동 불일치 | P2 |
 | 허용 목록에 필요한 토큰이 없음 | P3 (그래도 없으면 멈추고 보고) |
 | docs 개정 | P1부터 |
 
 ## 4. 게이트 실행
-- 전체: `node harness/gates/run-all.mjs --build --phase <단계>` → JSON. `pass: true`이고 위반 0건이면 통과.
-- 하나만: `node harness/gates/<g0-scope|g1-routes|g2-tokens|g4-sort|g5-privacy|g6-external|g8-comments>.mjs`
+- 전체: `node harness/gates/run-all.mjs --build --g7 --phase <단계>` → JSON. `pass: true`이고 위반 0건이면 통과.
+- 하나만: `node harness/gates/<g0-scope|g1-routes|g2-tokens|g4-sort|g5-privacy|g6-external|g7-viewport|g8-comments|g9-pricing>.mjs`
 - G3: `npm run build` · `npm run lint` (run-all의 `--build`)
-- G7: 미리보기 `next-dev`를 375×812로 열고 라우트 6개마다 `document.documentElement.scrollWidth ≤ 375`, 콘솔 오류 0건을 확인하고 스크린샷을 `harness/p5/shots/01~06.png`에 저장한다. `/plans/[id]`는 샘플 첫 요금제로 연다.
+- G7: `g7-viewport.mjs`가 빌드 결과로 `next start`(포트 3100)를 띄우고, 설치된 Chrome(Playwright `channel: "chrome"`)으로 라우트 6개를 375×812로 연다. 확인하는 것: 가로 스크롤 없음 · 콘솔 오류 0 · 다른 화면으로 튕기지 않음 · 외부 요청 0 · `/apply` 입력 요소 3개. 스크린샷은 `harness/p5/shots/01~06.png`에 저장한다. 먼저 build가 되어 있어야 한다.
+- G9: `g9-pricing.mjs`가 R1~R7을 따로 계산해 `pricing.ts` · `recommend()` · `buildApplication()`의 금액과 `formatWon` 표기를 대조한다.
 - 실패하면 게이트 출력 JSON을 그대로 해당 에이전트에게 넘겨 다시 시킨다. 같은 단계를 연속 3번 실패하면 멈추고 보고한다.
 - 게이트 스크립트 · 훅 · config · 에이전트는 훅으로 보호된다. 고쳐야 할 것 같으면 멈추고 사람에게 묻는다.
 
