@@ -37,10 +37,10 @@
     "01": {
       "status": "passed",
       "failures": 0,
-      "commit": null
+      "commit": "aa924fc"
     },
     "02": {
-      "status": "pending",
+      "status": "passed",
       "failures": 0,
       "commit": null
     },

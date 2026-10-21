@@ -23,6 +23,30 @@ export const customerTypeOptions: { value: CustomerType; title: string; desc: st
   { value: "add", title: "회선 추가", desc: "지금 쓰는 회선에 한 회선을 더해요" },
 ];
 
+// 화면 02 목적 선택지 문구 (change만, decisions.md T6)
+export const purposeOptions: { value: Purpose; title: string; desc: string }[] = [
+  { value: "more-data", title: "데이터 늘리기", desc: "데이터가 모자라요" },
+  { value: "lower-fee", title: "요금 낮추기", desc: "요금이 부담돼요" },
+];
+
+// 화면 02 약정 선택지 문구 (decisions.md T7)
+export const contractOptions: { value: ContractMonths; title: string; desc: string }[] = [
+  { value: 12, title: "12개월", desc: "월 요금 25% 할인" },
+  { value: 24, title: "24개월", desc: "월 요금 25% 할인" },
+  { value: 0, title: "약정 안 함", desc: "할인 없음" },
+];
+
+export function contractLabel(months: ContractMonths): string {
+  const found = contractOptions.find((o) => o.value === months);
+  return found ? found.title : "";
+}
+
+// 02에서 필요한 선택을 모두 했는가: change는 목적 · 약정 둘 다, 나머지는 약정만
+export function isUsageStepComplete(s: Selection): boolean {
+  if (!s.customerType || s.contractMonths === null) return false;
+  return s.customerType === "change" ? s.purpose !== null : true;
+}
+
 export const emptySelection: Selection = { customerType: null, purpose: null, contractMonths: null };
 
 const KEY = "plan-reco.selection";
