@@ -203,3 +203,6 @@ revoke all on function public.get_subscription(text) from public;
 grant execute on function public.create_subscription(text, text, integer, text, integer, integer, text, text, boolean)
   to anon, authenticated;
 grant execute on function public.get_subscription(text) to anon, authenticated;
+
+-- 공개 키 API(PostgREST)가 새 함수를 바로 알아보게 스키마 정보를 다시 읽힌다.
+notify pgrst, 'reload schema';

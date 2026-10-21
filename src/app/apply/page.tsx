@@ -188,7 +188,7 @@ export default function ApplyPage() {
                     [필수] 개인정보(이름·이메일) 수집·이용에 동의합니다
                   </span>
                   <span id={consentLabelId} className="text-caption-medium text-text-secondary">
-                    신청 확인에만 쓰고 이 브라우저에만 저장돼요.
+                    신청 확인에만 쓰고 신청 서버에 저장돼요.
                   </span>
                 </label>
               </div>
