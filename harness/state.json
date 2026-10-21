@@ -35,7 +35,7 @@
   },
   "screens": {
     "01": {
-      "status": "pending",
+      "status": "passed",
       "failures": 0,
       "commit": null
     },
