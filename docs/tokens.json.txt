@@ -1,0 +1,263 @@
+{
+  "primitive": {
+    "gray/950": { "hex": "#000000", "alpha": 1 },
+    "gray/900": { "hex": "#181A1B", "alpha": 1 },
+    "gray/800": { "hex": "#2D2D2D", "alpha": 1 },
+    "gray/600": { "hex": "#66707A", "alpha": 1 },
+    "gray/500": { "hex": "#878787", "alpha": 1 },
+    "gray/400": { "hex": "#B7BDC4", "alpha": 1 },
+    "gray/300": { "hex": "#D9DCDF", "alpha": 1 },
+    "gray/200": { "hex": "#EFF1F3", "alpha": 1 },
+    "gray/100": { "hex": "#F7F7F7", "alpha": 1 },
+    "gray/0": { "hex": "#FFFFFF", "alpha": 1 },
+    "pink/500": { "hex": "#FF2E98", "alpha": 1 },
+    "pink/600": { "hex": "#E6007E", "alpha": 1 },
+    "pink/50": { "hex": "#FFF5FA", "alpha": 1 },
+    "pink/25": { "hex": "#FFF8F5", "alpha": 1 },
+    "red/500": { "hex": "#E30036", "alpha": 1 },
+    "red/50": { "hex": "#FFF0F3", "alpha": 1 },
+    "black/10": { "hex": "#000000", "alpha": 0.1 }
+  },
+  "semantic": {
+    "fill/accent": {
+      "hex": "#E6007E",
+      "alpha": 1,
+      "primitive": "pink/600"
+    },
+    "text/accent": {
+      "hex": "#FF2E98",
+      "alpha": 1,
+      "primitive": "pink/500"
+    },
+    "icon/accent": {
+      "hex": "#FF2E98",
+      "alpha": 1,
+      "primitive": "pink/500"
+    },
+    "text/primary": {
+      "hex": "#181A1B",
+      "alpha": 1,
+      "primitive": "gray/900"
+    },
+    "text/secondary": {
+      "hex": "#66707A",
+      "alpha": 1,
+      "primitive": "gray/600"
+    },
+    "text/tertiary": {
+      "hex": "#878787",
+      "alpha": 1,
+      "primitive": "gray/500"
+    },
+    "text/on-dark": {
+      "hex": "#FFFFFF",
+      "alpha": 1,
+      "primitive": "gray/0"
+    },
+    "text/error": {
+      "hex": "#E30036",
+      "alpha": 1,
+      "primitive": "red/500"
+    },
+    "text/placeholder": {
+      "hex": "#B7BDC4",
+      "alpha": 1,
+      "primitive": "gray/400"
+    },
+    "text/on-disabled": {
+      "hex": "#66707A",
+      "alpha": 1,
+      "primitive": "gray/600"
+    },
+    "bg/surface": {
+      "hex": "#FFFFFF",
+      "alpha": 1,
+      "primitive": "gray/0"
+    },
+    "bg/default": {
+      "hex": "#F7F7F7",
+      "alpha": 1,
+      "primitive": "gray/100"
+    },
+    "bg/subtle": {
+      "hex": "#EFF1F3",
+      "alpha": 1,
+      "primitive": "gray/200"
+    },
+    "bg/inverse": {
+      "hex": "#2D2D2D",
+      "alpha": 1,
+      "primitive": "gray/800"
+    },
+    "bg/accent-subtle": {
+      "hex": "#FFF5FA",
+      "alpha": 1,
+      "primitive": "pink/50"
+    },
+    "bg/error-subtle": {
+      "hex": "#FFF0F3",
+      "alpha": 1,
+      "primitive": "red/50"
+    },
+    "border/default": {
+      "hex": "#D9DCDF",
+      "alpha": 1,
+      "primitive": "gray/300"
+    },
+    "border/subtle": {
+      "hex": "#EFF1F3",
+      "alpha": 1,
+      "primitive": "gray/200"
+    },
+    "border/strong": {
+      "hex": "#181A1B",
+      "alpha": 1,
+      "primitive": "gray/900"
+    },
+    "border/divider": {
+      "hex": "#000000",
+      "alpha": 0.1,
+      "primitive": "black/10"
+    },
+    "border/focus": {
+      "hex": "#FF2E98",
+      "alpha": 1,
+      "primitive": "pink/500"
+    },
+    "border/error": {
+      "hex": "#E30036",
+      "alpha": 1,
+      "primitive": "red/500"
+    },
+    "fill/primary": {
+      "hex": "#E6007E",
+      "alpha": 1,
+      "primitive": "pink/600"
+    },
+    "fill/secondary": {
+      "hex": "#181A1B",
+      "alpha": 1,
+      "primitive": "gray/900"
+    },
+    "fill/tertiary": {
+      "hex": "#EFF1F3",
+      "alpha": 1,
+      "primitive": "gray/200"
+    },
+    "fill/disabled": {
+      "hex": "#D9DCDF",
+      "alpha": 1,
+      "primitive": "gray/300"
+    },
+    "fill/disabled-strong": {
+      "hex": "#B7BDC4",
+      "alpha": 1,
+      "primitive": "gray/400"
+    },
+    "fill/primary-hover": {
+      "hex": "#E6007E",
+      "alpha": 1,
+      "primitive": "pink/600"
+    },
+    "icon/default": {
+      "hex": "#66707A",
+      "alpha": 1,
+      "primitive": "gray/600"
+    },
+    "icon/strong": {
+      "hex": "#181A1B",
+      "alpha": 1,
+      "primitive": "gray/900"
+    },
+    "border/medium": {
+      "hex": "#66707A",
+      "alpha": 1,
+      "primitive": "gray/600"
+    },
+    "surface/default": {
+      "hex": "#FFFFFF",
+      "alpha": 1,
+      "primitive": "gray/0"
+    },
+    "icon/on-dark": {
+      "hex": "#FFFFFF",
+      "alpha": 1,
+      "primitive": "gray/0"
+    },
+    "icon/disabled": {
+      "hex": "#D9DCDF",
+      "alpha": 1,
+      "primitive": "gray/300"
+    },
+    "icon/error": {
+      "hex": "#E30036",
+      "alpha": 1,
+      "primitive": "red/500"
+    },
+    "icon/primary": {
+      "hex": "#000000",
+      "alpha": 1,
+      "primitive": "gray/950"
+    },
+    "brand/primary": {
+      "hex": "#FF2E98",
+      "alpha": 1,
+      "primitive": "pink/500"
+    },
+    "effect/shadow-subtle": {
+      "hex": "#000000",
+      "alpha": 0.05,
+      "primitive": null
+    }
+  },
+  "typography": {
+    "font-family/family-font": "Noto Sans KR",
+    "font-size/heading-h1": 32,
+    "font-size/heading-h2": 28,
+    "font-size/heading-h3": 24,
+    "font-size/heading-h4": 20,
+    "font-size/subtitle": 18,
+    "font-size/body": 16,
+    "font-size/body-small": 14,
+    "font-size/caption": 13,
+    "font-size/caption-mini": 10,
+    "font-size/12": 12
+  },
+  "spacing": {
+    "spacing/4": 4,
+    "spacing/8": 8,
+    "spacing/12": 12,
+    "spacing/16": 16,
+    "spacing/20": 20,
+    "spacing/24": 24,
+    "spacing/32": 32,
+    "spacing/40": 40,
+    "spacing/48": 48,
+    "spacing/80": 80,
+    "spacing/10": 10,
+    "spacing/0": 0,
+    "spacing/2": 2,
+    "spacing/6": 6,
+    "spacing/56": 56,
+    "spacing/64": 64,
+    "spacing/28": 28,
+    "spacing/60": 60
+  },
+  "radius": {
+    "radius/4": 4,
+    "radius/8": 8,
+    "radius/12": 12,
+    "radius/16": 16,
+    "radius/20": 20,
+    "radius/24": 24,
+    "radius/32": 32,
+    "radius/full": 9999,
+    "radius/2": 2,
+    "radius/0": 0,
+    "radius/5": 5,
+    "radius/6": 6,
+    "radius/999": 999,
+    "radius/10": 10,
+    "radius/40": 40
+  }
+}
