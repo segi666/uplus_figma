@@ -1,0 +1,200 @@
+{
+  "version": 1,
+  "screens": [
+    {
+      "id": "01",
+      "name": "고객 유형 선택",
+      "route": "/",
+      "stories": [],
+      "rules": ["F1", "F7", "C3", "N1", "N4"],
+      "components": [
+        { "name": "Header", "variant": "Type=root", "content": "Title: 미정 (첫 화면이라 뒤로가기 없음)", "source": "design.md 4.5" },
+        { "name": "Logo", "variant": "-", "content": "root Header 오른쪽", "source": "design.md 4.17" },
+        { "name": "신규: 안내 문구", "variant": "-", "content": "고객 유형을 고르라는 안내. 정확한 문구 미정", "source": "context.md 4장 01" },
+        { "name": "OptionItem", "variant": "State=default | selected", "content": "Title: 요금제 변경 (change) / Desc: 미정", "source": "design.md 4.7" },
+        { "name": "OptionItem", "variant": "State=default | selected", "content": "Title: 번호이동 (port) / Desc: 미정", "source": "design.md 4.7" },
+        { "name": "OptionItem", "variant": "State=default | selected", "content": "Title: 완전 신규 (new) / Desc: 미정", "source": "design.md 4.7" },
+        { "name": "OptionItem", "variant": "State=default | selected", "content": "Title: 회선 추가 (add) / Desc: 미정", "source": "design.md 4.7" },
+        { "name": "BottomCTA", "variant": "Layout=single", "content": "내부 Button 하나", "source": "design.md 4.4" },
+        { "name": "Button", "variant": "Type=Primary, Size=xl, State=Default | Disabled", "content": "Label: 다음", "source": "design.md 4.3" }
+      ],
+      "states": [
+        { "name": "기본", "desc": "안내 문구와 고객 유형 선택지 4개를 보여 준다. selected는 한 번에 하나" },
+        { "name": "선택 전", "desc": "아무것도 고르지 않음. 다음 버튼 State=Disabled, 동작도 막는다 [가정]" },
+        { "name": "선택 후", "desc": "고른 OptionItem은 State=selected. 다음 버튼 State=Default" },
+        { "name": "되돌아옴", "desc": "02에서 뒤로 왔을 때 앞에서 고른 유형이 유지된다 (F7 [가정])" }
+      ],
+      "next": [ { "action": "다음", "to": "02" } ],
+      "back": null,
+      "source": { "prd": "context.md 4장 화면 01", "screens": "01 (OptionItem 단일 선택 패턴)", "figma": null }
+    },
+    {
+      "id": "02",
+      "name": "사용량 확인 · 목적·약정 선택",
+      "route": "/usage",
+      "stories": ["US1"],
+      "rules": ["F1", "F7", "R4", "C2", "N3"],
+      "components": [
+        { "name": "Header", "variant": "Type=default", "content": "Title: 미정 / 뒤로가기 → 01", "source": "design.md 4.5" },
+        { "name": "icon/arrowLeft", "variant": "-", "content": "Header 뒤로가기", "source": "design.md 4.14" },
+        { "name": "List/Row", "variant": "Type=default", "content": "Label: 샘플 월 데이터 사용량 / Value: ○GB (고객 유형별 샘플 값)", "source": "design.md 4.9" },
+        { "name": "List/Row", "variant": "Type=default", "content": "(change만) Label: 지금 요금제 / Value: 요금제명 (자리표시자)", "source": "design.md 4.9" },
+        { "name": "List/Row", "variant": "Type=default", "content": "(change만) Label: 지금 둘째 달부터 청구 금액 / Value: ○원", "source": "design.md 4.9" },
+        { "name": "신규: 그룹 제목", "variant": "-", "content": "목적 선택 · 약정 선택 그룹 제목. 문구 미정", "source": "context.md 4장 02" },
+        { "name": "OptionItem", "variant": "State=default | selected", "content": "(change만) Title: 데이터 늘리기 (more-data) / Desc: 미정", "source": "design.md 4.7" },
+        { "name": "OptionItem", "variant": "State=default | selected", "content": "(change만) Title: 요금 낮추기 (lower-fee) / Desc: 미정", "source": "design.md 4.7" },
+        { "name": "OptionItem", "variant": "State=default | selected", "content": "Title: 12개월 (12) / Desc: 미정", "source": "design.md 4.7" },
+        { "name": "OptionItem", "variant": "State=default | selected", "content": "Title: 24개월 (24) / Desc: 미정", "source": "design.md 4.7" },
+        { "name": "OptionItem", "variant": "State=default | selected", "content": "Title: 약정 안 함 (0) / Desc: 미정", "source": "design.md 4.7" },
+        { "name": "BottomCTA", "variant": "Layout=single", "content": "내부 Button 하나", "source": "design.md 4.4" },
+        { "name": "Button", "variant": "Type=Primary, Size=xl, State=Default | Disabled", "content": "Label: 추천 보기", "source": "design.md 4.3" }
+      ],
+      "states": [
+        { "name": "기본 (change)", "desc": "샘플 사용량, 지금 요금제명·지금 둘째 달부터 청구 금액, 목적 선택 2개, 약정 선택 3개를 보여 준다" },
+        { "name": "기본 (port · new · add)", "desc": "샘플 사용량과 약정 선택만 보여 준다. 목적 선택과 지금 요금제 줄은 숨긴다 (F1)" },
+        { "name": "선택 미완료", "desc": "change는 목적·약정 둘 다, 나머지는 약정을 골라야 한다. 그 전에는 추천 보기 State=Disabled [가정]" },
+        { "name": "선택 완료", "desc": "추천 보기 State=Default" },
+        { "name": "약정 기본값", "desc": "미정 (Q2). 기본 선택 없이 시작할지 정해지지 않음" },
+        { "name": "고객 유형 없음", "desc": "01을 거치지 않고 들어온 경우의 처리 미정" }
+      ],
+      "next": [ { "action": "추천 보기", "to": "03" } ],
+      "back": "01",
+      "source": { "prd": "context.md 4장 화면 02", "screens": null, "figma": null }
+    },
+    {
+      "id": "03",
+      "name": "추천 결과",
+      "route": "/plans",
+      "stories": ["US3", "US6"],
+      "rules": ["F3", "F4", "R8", "R9", "R10", "R11", "R12", "R13", "R14", "F2", "R7", "N3", "C2"],
+      "components": [
+        { "name": "Header", "variant": "Type=default", "content": "Title: 미정 / 뒤로가기 → 02", "source": "design.md 4.5" },
+        { "name": "icon/arrowLeft", "variant": "-", "content": "Header 뒤로가기", "source": "design.md 4.14" },
+        { "name": "신규: 추천 근거 문구", "variant": "-", "content": "\"샘플 사용량 ○GB 기준\" 형태 (R13 [가정]). 'GB 기준'을 포함한다", "source": "context.md 5장 A" },
+        { "name": "신규: 정렬 기준 문구", "variant": "-", "content": "둘째 달부터 청구 금액이 '낮은 순'임을 알리는 문구. 정확한 문구 미정", "source": "context.md 5장 A" },
+        { "name": "신규: 빈 상태 안내", "variant": "-", "content": "예외 상황 안내 문구. lower-fee 저렴한 요금제 없음: \"지금보다 저렴한 요금제가 없어요\" / 사용량 감당 요금제 없음: 사용량보다 적다는 안내 (문구 미정)", "source": "context.md 2장 예외 상황" },
+        { "name": "Card/Plan", "variant": "State=default", "content": "Name: 요금제명 (자리표시자 '요금제 A' 형태) / Desc: 데이터량 / Price: 둘째 달부터 청구 금액 / Sale=false, Promo=false / Badge는 가시성 연결이 없음 (design.md 4.11 주의). 개수 미정 (Q3)", "source": "design.md 4.11" },
+        { "name": "신규: 지금 대비 금액 차이", "variant": "-", "content": "(change만) 카드 안에 지금 요금제 대비 둘째 달부터 청구 금액 차이 [가정]. 표기 형식 미정", "source": "context.md 4장 03" },
+        { "name": "Button", "variant": "Type=Secondary, Size=sm, State=Default", "content": "Card/Plan 내부 버튼. Label: 미정. 누르면 해당 요금제 04로", "source": "design.md 4.3, 4.11" }
+      ],
+      "states": [
+        { "name": "기본", "desc": "추천 근거 문구, 정렬 기준 문구, 둘째 달부터 청구 금액 낮은 순 카드 목록 (R8). 보이지 않는 기준으로 순서를 바꾸지 않는다 (R14)" },
+        { "name": "change 고객", "desc": "카드마다 지금 대비 금액 차이를 함께 보여 준다 [가정]" },
+        { "name": "빈 상태: 지금보다 저렴한 요금제 없음", "desc": "lower-fee에서 대상이 없을 때 \"지금보다 저렴한 요금제가 없어요\"를 알리고, 사용량을 감당하는 요금제 중 가장 저렴한 것을 함께 보여 준다 [가정]" },
+        { "name": "빈 상태: 사용량 감당 요금제 없음", "desc": "데이터량이 가장 큰 요금제부터 보여 주고 사용량보다 적다고 알린다 [가정]. 문구 미정" },
+        { "name": "표시 개수", "desc": "미정 (Q3)" },
+        { "name": "선택 조건 없음", "desc": "02를 거치지 않고 들어온 경우의 처리 미정" }
+      ],
+      "next": [ { "action": "카드 선택", "to": "04" } ],
+      "back": "02",
+      "source": { "prd": "context.md 4장 화면 03", "screens": "02, 05 (Card/Plan 목록)", "figma": "4189:8047" }
+    },
+    {
+      "id": "04",
+      "name": "요금제 상세 · 청구 금액 내역",
+      "route": "/plans/[id]",
+      "stories": ["US4"],
+      "rules": ["F1", "F2", "R1", "R2", "R3", "R4", "R5", "R6", "R7", "N3", "C2"],
+      "components": [
+        { "name": "Header", "variant": "Type=default", "content": "Title: 미정 / 뒤로가기 → 03", "source": "design.md 4.5" },
+        { "name": "icon/arrowLeft", "variant": "-", "content": "Header 뒤로가기", "source": "design.md 4.14" },
+        { "name": "Card/Price", "variant": "-", "content": "금액 라벨: 요금제명 (자리표시자) / 핵심 금액: 월 요금 / 보조 정보: 미정", "source": "design.md 4.10" },
+        { "name": "신규: 섹션 제목", "variant": "-", "content": "요금제 정보 · 포함 혜택 · 청구 금액 내역 섹션 제목. 문구 미정", "source": "context.md 4장 04" },
+        { "name": "List/Row", "variant": "Type=default", "content": "Label: 데이터량 / Value: ○GB 또는 무제한", "source": "design.md 4.9" },
+        { "name": "List/Row", "variant": "Type=default", "content": "Label: 데이터 다 쓴 뒤 속도 / Value: throttleSpeed", "source": "design.md 4.9" },
+        { "name": "List/Row", "variant": "Type=default", "content": "Label: 통화 / Value: voice", "source": "design.md 4.9" },
+        { "name": "List/Row", "variant": "Type=default", "content": "Label: 문자 / Value: sms", "source": "design.md 4.9" },
+        { "name": "List/Row", "variant": "Type=default", "content": "Label: 테더링·공유 데이터 / Value: tethering", "source": "design.md 4.9" },
+        { "name": "List/Row", "variant": "Type=check", "content": "포함 혜택 한 줄씩. 혜택명은 자리표시자 '혜택 A' 형태", "source": "design.md 4.9" },
+        { "name": "List/Row", "variant": "Type=default", "content": "금액 내역: 월 요금", "source": "design.md 4.9" },
+        { "name": "List/Row", "variant": "Type=default", "content": "금액 내역: − 약정 할인 (원래 월 요금 × 25%, 약정 안 함이면 0)", "source": "design.md 4.9" },
+        { "name": "List/Row", "variant": "Type=default", "content": "금액 내역: − 결합 할인 (change · add만)", "source": "design.md 4.9" },
+        { "name": "List/Row", "variant": "Type=default", "content": "금액 내역: = 둘째 달부터 청구 금액", "source": "design.md 4.9" },
+        { "name": "List/Row", "variant": "Type=default", "content": "금액 내역: + 위약금 (change만)", "source": "design.md 4.9" },
+        { "name": "List/Row", "variant": "Type=default", "content": "금액 내역: = 첫 달 청구 금액 (change만)", "source": "design.md 4.9" },
+        { "name": "신규: 세로 버튼 영역", "variant": "-", "content": "Button 2개 세로 배치 (요금제 상세 하단 구성, 높이 160 · 좌우 24 · 사이 8 · 아래 32)", "source": "design.md 3.4 화면별 별도 하단 구성" },
+        { "name": "Button", "variant": "Type=Primary, Size=xl, State=Default", "content": "Label: 이 요금제로 신청", "source": "design.md 4.3" },
+        { "name": "Button", "variant": "Type=Secondary, Size=xl, State=Default", "content": "Label: 다른 요금제 보기", "source": "design.md 4.3" }
+      ],
+      "states": [
+        { "name": "기본 (change)", "desc": "월 요금 − 약정 할인 − 결합 할인 = 둘째 달부터 청구 금액 + 위약금 = 첫 달 청구 금액 줄을 모두 보여 준다" },
+        { "name": "add 고객", "desc": "결합 할인 줄은 보이고 위약금 · 첫 달 청구 금액 줄은 숨긴다" },
+        { "name": "port · new 고객", "desc": "결합 할인 · 위약금 · 첫 달 청구 금액 줄을 숨긴다 (US4 (3))" },
+        { "name": "약정 안 함", "desc": "약정 할인은 0으로 보인다 (R4 [가정])" },
+        { "name": "없는 요금제 id", "desc": "미정" },
+        { "name": "로딩 · 에러", "desc": "미정 (PRD 상태 미정)" }
+      ],
+      "next": [
+        { "action": "이 요금제로 신청", "to": "05" },
+        { "action": "다른 요금제 보기", "to": "03" }
+      ],
+      "back": "03",
+      "source": { "prd": "context.md 4장 화면 04", "screens": "03, 04", "figma": "4189:8064" }
+    },
+    {
+      "id": "05",
+      "name": "신청 확인 (저장)",
+      "route": "/apply",
+      "stories": ["US5"],
+      "rules": ["R15", "R16", "R17", "F5", "F6", "C1", "N2", "R18"],
+      "components": [
+        { "name": "Header", "variant": "Type=default", "content": "Title: 미정 / 뒤로가기 → 04", "source": "design.md 4.5" },
+        { "name": "icon/arrowLeft", "variant": "-", "content": "Header 뒤로가기", "source": "design.md 4.14" },
+        { "name": "신규: 섹션 제목", "variant": "-", "content": "신청 요약 · 신청자 정보 섹션 제목. 문구 미정", "source": "context.md 4장 05" },
+        { "name": "List/Row", "variant": "Type=default", "content": "Label: 고객 유형 / Value: 요금제 변경 · 번호이동 · 완전 신규 · 회선 추가 중 하나", "source": "design.md 4.9" },
+        { "name": "List/Row", "variant": "Type=default", "content": "Label: 요금제 / Value: 요금제명 (자리표시자)", "source": "design.md 4.9" },
+        { "name": "List/Row", "variant": "Type=default", "content": "Label: 약정 / Value: 12개월 · 24개월 · 약정 안 함", "source": "design.md 4.9" },
+        { "name": "List/Row", "variant": "Type=default", "content": "Label: 첫 달 청구 금액 / Value: ○원 (change 외 유형에서 이 줄을 보일지 미정)", "source": "design.md 4.9" },
+        { "name": "List/Row", "variant": "Type=default", "content": "Label: 둘째 달부터 청구 금액 / Value: ○원", "source": "design.md 4.9" },
+        { "name": "Input", "variant": "State=default | focus | filled | caution", "content": "이름 (type=text, name=name). 라벨: 이름 / placeholder: 미정 / caution 메시지: 미정", "source": "design.md 4.1" },
+        { "name": "Input", "variant": "State=default | focus | filled | caution", "content": "이메일 (type=email, name=email). 라벨: 이메일 / placeholder: 미정 / caution 메시지: 미정", "source": "design.md 4.1" },
+        { "name": "Checkbox", "variant": "State=default | active", "content": "개인정보 수집·이용 동의 (name=privacyConsent). 레이블은 바깥에 따로 배치. 동의 문구 미정 (Q5)", "source": "design.md 4.2" },
+        { "name": "신규: 저장 실패 안내", "variant": "-", "content": "저장 실패를 알리고 다시 시도하게 하는 안내. 문구 미정", "source": "context.md 2장 예외 상황" },
+        { "name": "BottomCTA", "variant": "Layout=single", "content": "내부 Button 하나", "source": "design.md 4.4" },
+        { "name": "Button", "variant": "Type=Primary, Size=xl, State=Default | Disabled", "content": "Label: 신청하기", "source": "design.md 4.3" }
+      ],
+      "states": [
+        { "name": "기본", "desc": "신청 요약, 빈 이름 · 이메일 입력(State=default), 동의 체크박스(State=default), 신청하기 버튼" },
+        { "name": "입력 오류: 이름 비움", "desc": "저장하지 않는다. 이름 Input State=caution, 칸 아래 안내 문구 (문구 미정)" },
+        { "name": "입력 오류: 이메일 비움", "desc": "저장하지 않는다. 이메일 Input State=caution, 칸 아래 안내 문구 (문구 미정)" },
+        { "name": "입력 오류: 이메일 형식 틀림", "desc": "저장하지 않는다. 이메일 Input State=caution, 칸 아래 안내 문구 (문구 미정)" },
+        { "name": "동의 안 함", "desc": "저장하지 않는다 [가정]. Checkbox에 오류 변형이 없어 안내 방식 · 문구 미정" },
+        { "name": "저장 중", "desc": "신청하기 버튼 State=Disabled, 동작도 막는다. Loading 변형은 없다" },
+        { "name": "저장 실패", "desc": "실패 안내를 보여 주고 입력한 내용은 지우지 않는다. 신청하기를 다시 누를 수 있다 [가정]" },
+        { "name": "저장 성공", "desc": "Application을 브라우저 안에만 저장하고(서버 전송 없음) 신청 시점 금액을 함께 저장한 뒤 06으로 이동한다 (F5, F6)" }
+      ],
+      "next": [ { "action": "저장 성공", "to": "06" } ],
+      "back": "04",
+      "source": { "prd": "context.md 4장 화면 05", "screens": "12 (입력 내용 확인 요약 패턴), 09 (Input 패턴)", "figma": "4189:8087" }
+    },
+    {
+      "id": "06",
+      "name": "신청 완료",
+      "route": "/complete",
+      "stories": ["US5"],
+      "rules": ["F5", "F6", "C1", "N2", "N3"],
+      "components": [
+        { "name": "Header", "variant": "Type=default", "content": "Title: 미정. PRD 이동은 처음으로만 있어 뒤로가기 아이콘 동작은 미정", "source": "design.md 4.5" },
+        { "name": "icon/doneMark", "variant": "-", "content": "완료 대표 표시 64×64", "source": "design.md 4.16" },
+        { "name": "신규: 완료 문구", "variant": "-", "content": "신청 완료를 알리는 제목 · 설명. 문구 미정", "source": "context.md 4장 06" },
+        { "name": "신규: 섹션 제목", "variant": "-", "content": "신청 요약 섹션 제목. 문구 미정", "source": "context.md 4장 06" },
+        { "name": "List/Row", "variant": "Type=default", "content": "Label: 요금제 / Value: 요금제명 (자리표시자)", "source": "design.md 4.9" },
+        { "name": "List/Row", "variant": "Type=default", "content": "Label: 약정 / Value: 12개월 · 24개월 · 약정 안 함", "source": "design.md 4.9" },
+        { "name": "List/Row", "variant": "Type=default", "content": "Label: 첫 달 청구 금액 / Value: 저장된 firstMonthAmount", "source": "design.md 4.9" },
+        { "name": "List/Row", "variant": "Type=default", "content": "Label: 둘째 달부터 청구 금액 / Value: 저장된 monthlyAmount", "source": "design.md 4.9" },
+        { "name": "List/Row", "variant": "Type=default", "content": "Label: 이름 / Value: 저장된 name", "source": "design.md 4.9" },
+        { "name": "신규: 프로토타입 안내 문구", "variant": "-", "content": "프로토타입이라 실제 변경 · 개통이나 이메일 발송은 되지 않는다는 안내 [가정]. 정확한 문구 미정", "source": "context.md 4장 06" },
+        { "name": "BottomCTA", "variant": "Layout=single", "content": "내부 Button 하나", "source": "design.md 4.4" },
+        { "name": "Button", "variant": "Type=Primary, Size=xl, State=Default", "content": "Label: 처음으로", "source": "design.md 4.3" }
+      ],
+      "states": [
+        { "name": "기본", "desc": "완료 표시, 완료 문구, 저장된 신청 요약, 프로토타입 안내, 처음으로 버튼" },
+        { "name": "새로고침", "desc": "새로고침해도 브라우저에 저장된 신청이 남아 그대로 보인다 [가정] (US5 (3))" },
+        { "name": "저장된 신청 없음", "desc": "신청 없이 직접 들어온 경우의 처리 미정" }
+      ],
+      "next": [ { "action": "처음으로", "to": "01" } ],
+      "back": null,
+      "source": { "prd": "context.md 4장 화면 06", "screens": "14", "figma": "4189:8110" }
+    }
+  ]
+}
