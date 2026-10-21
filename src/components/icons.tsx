@@ -39,6 +39,34 @@ export function IconCheckSmall({ className = "" }: { className?: string }) {
   );
 }
 
+// icon/doneMark (design.md 4.16): 64 × 64, fill/primary 원형 배경 + 내부 밝은 체크 (icon/on-dark).
+// 결과 화면의 대표 상태 표시용. 작게 줄여 Checkbox 대신 쓰지 않는다.
+export function IconDoneMark({ className = "" }: { className?: string }) {
+  return (
+    <span
+      aria-hidden="true"
+      className={`flex size-64 shrink-0 items-center justify-center rounded-full bg-fill-primary text-icon-on-dark ${className}`}
+    >
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        viewBox="0 0 32 32"
+        aria-hidden="true"
+        focusable="false"
+        className="block size-32 shrink-0"
+      >
+        <path
+          d="M8.5 16.5l5 5 10-11"
+          fill="none"
+          stroke="currentColor"
+          strokeWidth="3"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+        />
+      </svg>
+    </span>
+  );
+}
+
 // icon/arrowLeft: 24 × 24, 기본 도형 색 icon/default
 export function IconArrowLeft({ className = "" }: { className?: string }) {
   return (

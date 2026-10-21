@@ -1,6 +1,6 @@
 {
   "branch": "harness/run-20261021",
-  "phase": "P4",
+  "phase": "harness-upgrade",
   "phases": {
     "P1": {
       "status": "passed",
@@ -18,7 +18,7 @@
       "commit": "629cf44"
     },
     "P4": {
-      "status": "pending",
+      "status": "passed",
       "failures": 0,
       "commit": null
     },
@@ -57,10 +57,10 @@
     "05": {
       "status": "passed",
       "failures": 0,
-      "commit": null
+      "commit": "7142d47"
     },
     "06": {
-      "status": "pending",
+      "status": "passed",
       "failures": 0,
       "commit": null
     }
